@@ -2,8 +2,15 @@ const { validationResult } = require('express-validator');
 const Shipment = require('../models/Shipment')
 const Container = require('../models/Container')
 
+/**
+ * List all shipments with their containers
+ */
 const shipmentIndex = (req, res) => {
-    res.json('All shipment');
+
+    Shipment.find()
+        .populate('containers','name')
+        .then(result => res.json(result))
+        .catch(err => res.status(500).json(err))
 }
 
 const shipmentCreate = (req, res) => {
