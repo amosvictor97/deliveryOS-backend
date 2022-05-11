@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 const dbURI= "mongodb+srv://deliveryos:deliveryos2022@realmcluster.tpgga.mongodb.net/deliveryos-shipment-api?retryWrites=true&w=majority"
 mongoose.connect(dbURI)
     .then(result => console.log('connected to the db'))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err)) 
 
 
 app.use('/', indexRouter);
