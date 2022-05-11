@@ -13,6 +13,22 @@ const shipmentIndex = (req, res) => {
         .catch(err => res.status(500).json(err))
 }
 
+
+/**
+ * Get all containers of a shipment
+ */
+const containersByShipment = (req,res) => {
+    const shipmentId = req.params.id
+    Shipment.findById(shipmentId)
+        .populate('containers')
+        .then(({containers}) => res.json(containers))
+        .catch(err => res.status(500).json(err))
+}
+
+
+/**
+ * Create a new shipment
+ */
 const shipmentCreate = (req, res) => {
 
     const errors = validationResult(req);
@@ -46,5 +62,6 @@ const shipmentCreate = (req, res) => {
 
 module.exports = {
     shipmentIndex,
-    shipmentCreate
+    shipmentCreate,
+    containersByShipment,
 }

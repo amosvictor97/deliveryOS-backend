@@ -9,6 +9,12 @@ const validator = require('../utils/validator')
  */
 router.get('/',shipmentController.shipmentIndex)
 
+
+/**
+ * GET all containers of shipments
+ */
+router.get('/(:id)/containers',shipmentController.containersByShipment)
+
 /**
  * Create new shipment
  */

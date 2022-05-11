@@ -6,7 +6,7 @@ const containerSchema = new Schema({
         type: String,
         required: true
     },
-    trackings : [
+    trackingSteps : [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref:'TrackingStep'
