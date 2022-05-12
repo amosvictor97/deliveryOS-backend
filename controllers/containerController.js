@@ -25,9 +25,6 @@ const updateTrackingStep = (req, res,next) => {
     const trackingStepId = req.params.stepId
 
     if (req.body.hasOwnProperty('status') && req.body.status === 'Complete') {
-        const newStatut = req.body.status
-
-        console.log("the new status is  -Complete")
 
         //get all sorted trackingsteps of the container
         TrackingStep.find({ 'container': containerId })
@@ -36,27 +33,20 @@ const updateTrackingStep = (req, res,next) => {
         .then(steps => {
             //find index of the main trackingStep
             const index = steps.findIndex(step => step._id.equals(trackingStepId))
-            console.log(index)
-            console.log(steps[0]._id.toString())
            
             //update the next one
             if (index >= 1) {
-                console.log("index > 1")
                  //check the previous status
                 if (steps[index - 1].status !== 'Complete') {
-                    console.log(steps[index - 1].status)
                     res.status(403)
                         .json({ 
                             'message': 'A tracking step cannot be completed if the previous step has not been completed' 
                         })
                 }
                 else {
-                    console.log("the previous Step status is ok")
                     //check if we have a next step available
                     if (index < steps.length -1) {
                         const nextStep = steps[index + 1]
-                        console.log("trying to update the next one")
-                        console.log(nextStep)
                         //update the next one status to => in progress
                         TrackingStep.findOneAndUpdate({_id :nextStep._id.toString()},{ $set:{'status': 'In-Progress'}})
                             .then(result => {
@@ -69,7 +59,6 @@ const updateTrackingStep = (req, res,next) => {
                             .catch(err => {
                                 res.status(500).json({'message':err})
                             })
-                        console.log("after update the next one")
                     }
                     else{
                         TrackingStep.findByIdAndUpdate(trackingStepId, req.body)
@@ -105,8 +94,6 @@ const updateTrackingStep = (req, res,next) => {
         
     }else {
         //update the main trackingStep
-        console.log("i dont have COmplete status in the update request")
-
         TrackingStep.findByIdAndUpdate(trackingStepId, req.body)
         .then(result => {
             console.log("updated resource result ready")

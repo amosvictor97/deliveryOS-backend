@@ -7,7 +7,7 @@ const validator = require('../utils/validator')
 
 /**
  * @swagger
- * /shipments:
+ * /api/shipments:
  *   get:
  *     summary: Retrieve a list of all shipments
  *     description: Retrieve a list of all shipments with their containers
@@ -48,7 +48,7 @@ router.get('/',shipmentController.shipmentIndex)
 
 /**
  * @swagger
- * /shipments/{shipmentID}/containers:
+ * /api/shipments/{shipmentID}/containers:
  *   get:
  *     summary: Retrieve all containers of a shipment
  *     description: Retrieve a list of containers in a shipment
@@ -86,7 +86,7 @@ router.get('/(:id)/containers',shipmentController.containersByShipment)
 
 /**
  * @swagger
- * /shipments:
+ * /api/shipments:
  *   post:
  *     summary: Create a new shipment.
  *     requestBody:

@@ -6,7 +6,7 @@ const containerController = require('../controllers/containerController')
 
 /**
  * @swagger
- * /containers/{containerId}/trackingsteps/{trackingStepId}:
+ * /api/containers/{containerId}/trackingsteps/{trackingStepId}:
  *   put:
  *     summary: Update a tracking step.
  *     parameters:
@@ -76,7 +76,7 @@ router.put('/(:containerId)/trackingsteps/(:stepId)',containerController.updateT
 
 /**
  * @swagger
- * /containers/{containerId}/trackingsteps:
+ * /api/containers/{containerId}/trackingsteps:
  *   post:
  *     summary: Create a new tracking step.
  *     parameters:
