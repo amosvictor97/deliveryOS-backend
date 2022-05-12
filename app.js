@@ -7,7 +7,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
 const shipmentsRouter = require('./routes/shipments');
-const containerRouter = require('./routes/container');
+const containerRouter = require('./routes/containers');
 
 const app = express();
 
@@ -35,7 +35,7 @@ const options = {
       openapi: "3.0.0",
       info: { title: "DeliveryOS Shipment Test API", version: "1.0.0" },
     },
-    apis: ["./routes/shipments.js","./routes/tracking.js"],
+    apis: ["./routes/shipments.js","./routes/containers.js"],
   };
   
 // Docs in JSON format
