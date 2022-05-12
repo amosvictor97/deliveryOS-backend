@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 const containerRouter = require('./routes/container');
 const shipmentsRouter = require('./routes/shipments');
-const trackingRouter = require('./routes/trackingStep');
 
 const app = express();
 
@@ -19,8 +18,7 @@ mongoose.connect(dbURI)
     .catch(err => console.log(err)) 
 
 
-app.use('/containers', containerRouter);
-app.use('/shipments', shipmentsRouter);
-app.use('/tracking-steps', trackingRouter);
+app.use('/api/containers', containerRouter);
+app.use('/api/shipments', shipmentsRouter);
 
 module.exports = app;
