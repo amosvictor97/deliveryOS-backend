@@ -1,5 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
+const cors = require('cors')
 const mongoose = require('mongoose');
 
 
@@ -18,10 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 //connect to mongodb
 const dbURI= "mongodb+srv://deliveryos:deliveryos2022@realmcluster.tpgga.mongodb.net/deliveryos-shipment-api?retryWrites=true&w=majority"
 
-/* mongoose.connect(dbURI)
+mongoose.connect(dbURI)
     .then(result => console.log('connected to the db'))
-    .catch(err => console.log(err))  */
+    .catch(err => console.log(err))
 
+app.use(cors())
 
 app.use('/api/shipments', shipmentsRouter);
 app.use('/api/containers', containerRouter);
