@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const trackingStepSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     status: {
         type: String,
@@ -13,8 +13,12 @@ const trackingStepSchema = new Schema({
     },
     completed_at: {
         type: Date,
-        required: true
     },
+    container: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Container',
+        required: 'You must provide a container ID'
+    }
 },{ timestamps: true });
 
 const TrackingStep = mongoose.model('TrackingStep',trackingStepSchema)

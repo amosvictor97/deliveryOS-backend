@@ -3,7 +3,7 @@ const Shipment = require('../models/Shipment')
 const Container = require('../models/Container')
 
 /**
- * List all shipments with their containers
+ * List all shipments with their containers name
  */
 const shipmentIndex = (req, res) => {
 
@@ -20,9 +20,22 @@ const shipmentIndex = (req, res) => {
 const containersByShipment = (req,res) => {
     const shipmentId = req.params.id
     Shipment.findById(shipmentId)
-        .populate('containers')
-        .then(({containers}) => res.json(containers))
-        .catch(err => res.status(500).json(err))
+        .populate({
+            path : 'containers',
+            populate : {
+            path : 'trackingSteps'
+            }
+        })
+        .then((result) => {
+            if(!result){
+                res.status(404).json({'message':'Resource not found'})
+            }
+            res.json(result.containers)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({'message': err})
+        })
 }
 
 
