@@ -3,6 +3,8 @@ const logger = require('morgan');
 const cors = require('cors')
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -17,9 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //connect to mongodb
-const dbURI= "mongodb+srv://deliveryos:deliveryos2022@realmcluster.tpgga.mongodb.net/deliveryos-shipment-api?retryWrites=true&w=majority"
 
-mongoose.connect(dbURI)
+mongoose.connect(`${process.env.DATABASE_URL}`)
     .then(result => console.log('connected to the db'))
     .catch(err => console.log(err))
 
